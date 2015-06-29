@@ -226,12 +226,17 @@ public class MainActivity extends BaseActivity {
         switch (view.getId()){
             case R.id.editUserInfo:
                 intent = new Intent(this, EditUserInfoActivity.class);
+                startActivity(intent);
                 break;
             case R.id.mylover:
                 break;
             case R.id.setting:
                 break;
             case R.id.quit:
+                userManager.logout();
+                intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                finish();
                 break;
         }
     }
