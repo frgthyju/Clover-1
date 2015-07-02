@@ -2,6 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.clover" >
 
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
+    <permission
+        android:name="cn.bmob.permission.push"
+        android:protectionLevel="normal" >
+    </permission>
+
+    <uses-permission android:name="cn.bmob.permission.push" />
     <uses-permission android:name="cn.bmob.permission.push" /> <!-- 添加自定义的权限 -->
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,12 +22,15 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        android:name=".utils.CloverApplication">
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name" >
@@ -67,15 +79,15 @@
         </receiver>
 
         <activity
-            android:name="ui.LoverManagerActivity"
+            android:name=".ui.LoverManagerActivity"
             android:label="@string/title_activity_lover_manager" >
         </activity>
         <activity
-            android:name="ui.UserInfoUpdateActivity"
+            android:name=".ui.UserInfoUpdateActivity"
             android:label="@string/title_activity_user_info_update" >
         </activity>
         <activity
-            android:name="ui.ChatActivity"
+            android:name=".ui.ChatActivity"
             android:label="@string/title_activity_chat" >
         </activity>
         <activity
@@ -83,7 +95,7 @@
             android:label="@string/title_activity_ttta" >
         </activity>
         <activity
-            android:name="ui.TZFEActivity"
+            android:name=".ui.TZFEActivity"
             android:label="@string/title_activity_tzfe" >
         </activity>
         <activity
@@ -99,8 +111,12 @@
             android:label="@string/title_activity_register" >
         </activity>
         <activity
-            android:name=".ui.EditUserInfoActivity"
-            android:label="@string/title_activity_edit_user_info" >
+            android:name=".ui.MensesActivity"
+            android:label="@string/title_activity_menses" >
+        </activity>
+        <activity
+            android:name=".ui.DiseaseActivity"
+            android:label="@string/title_activity_disease" >
         </activity>
     </application>
 

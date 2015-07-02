@@ -13,6 +13,53 @@
     <string name="mylover">我的情侣</string>
     <string name="setting">设置</string>
     <string name="quit">退出</string>
+    <string name="network_tips">当前网络不可用,请检查您的网络!</string>
+    <string name="sleeping">正在睡觉</string>
+    <string name="getupreminder">发送闹钟</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="sorryforquery">未获取到数据</string>
+    <string name="kindreminder">温馨提示</string>
+    <string name="getuprenminder">对方睡觉，是否叫醒对方</string>
+    <string name="makesure">确定</string>
+    <string name="cancel">取消</string>
+
+    <string name="sleep_msg">我睡觉了</string>
+    <string name="getup_mas">该起床了</string>
+    <string name="eat_msg">我吃饭去了</string>
+    <string name="game_msg">我在玩游戏</string>
+    <string name="shop_msg">我在逛街</string>
+    <string name="miss_msg">我想你了</string>
+    <string name="apologize_msg">我错了</string>
+    <string name="boring_msg">好无聊呀</string>
+    <string name="do_msg">你在做什么呀</string>
+    <string name="kiss_msg">亲亲</string>
+    <string name="hug_msg">抱抱</string>
+    <string name="miao_msg">喵喵</string>
+    <string name="wang_msg">汪汪</string>
+    <string name="menses_coming_msg">大姨妈来了</string>
+    <string name="menses_going_msg">大姨妈走了</string>
+
+    <string name="menses_tell_msg">告诉他，姨妈来了</string>
+    <string name="menses_gone_msg">告诉他，姨妈走了</string>
+    <string name="disease_come_msg">我生病了</string>
+    <string name="disease_gone_msg">病好了</string>
+    <string name="drugreminder">记得吃药</string>
+    <string name="diseasereminder">您的恋人生病了</string>
+    <string name="eatdrug">该吃药了</string>
+
+    <string name="add_avator">头像</string>
+    <string name="add_nick">昵称</string>
+    <string name="add_name">账号</string>
+    <string name="add_name_hint">请输入昵称&#8230;</string>
+    <string name="add_age">年龄</string>
+    <string name="blacklist">黑名单</string>
+    <string name="chat">发起会话</string>
+    <string name="add_friend">添加好友</string>
+    <string name="black_tips">已添加至黑名单，你将不再收到对方的消息!</string>
+    <string name="pop_photo">拍照</string>
+    <string name="pop_choose">从相册选择</string>
+
 
     <string name="title_activity_anniversary">AnniversaryActivity</string>
     <string name="title_activity_health">HealthActivity</string>
@@ -26,4 +73,5 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_edit_user_info">EditUserInfoActivity</string>
+    <string name="title_activity_menses">MensesActivity</string>
 </resources>

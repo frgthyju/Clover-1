@@ -10,6 +10,14 @@
         android:background="#b4a7d6"/>
 
     <LinearLayout
+        android:id="@+id/sleep_reminder_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+        <include layout="@layout/include_interact_sleep_reminder"/>
+        </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -41,51 +49,88 @@
             android:orientation="horizontal"
             android:layout_gravity="center_horizontal">
             <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp" />
-            <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp" />
-            <Button
+                android:id="@+id/SleepReminder"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="10dp"/>
+                android:text="sleep"
+                android:onClick="onMainClick"/>
             <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp" />
-            <Button
+                android:id="@+id/EatReminder"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="10dp"/>
+                android:text="eat"
+                android:onClick="onMainClick"/>
             <Button
+                android:id="@+id/MissReminder"
                 android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:text="miss"
+                android:layout_marginLeft="10dp"
+                android:onClick="onMainClick"/>
+            <Button
+                android:id="@+id/ApologizeReminder"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="apologize"
+                android:onClick="onMainClick"/>
+            <Button
+                android:id="@+id/KissReminder"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="kiss"
+                android:layout_marginLeft="10dp"
+                android:onClick="onMainClick"/>
+            <Button
+                android:id="@+id/HugReminder"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="hug"
+                android:onClick="onMainClick"/>
             </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:text="eat"
             android:layout_gravity="center_horizontal">
             <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp" />
-            <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp" />
-            <Button
+                android:id="@+id/GameReminder"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="10dp"/>
+                android:text="game"
+                android:onClick="onMainClick"/>
             <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp" />
-            <Button
+                android:id="@+id/ShopReminder"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="10dp"/>
+                android:text="shop"
+                android:onClick="onMainClick"/>
             <Button
+                android:id="@+id/BoringReminder"
                 android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:text="boring"
+                android:onClick="onMainClick"/>
+            <Button
+                android:id="@+id/DoReminder"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="do"
+                android:onClick="onMainClick"/>
+            <Button
+                android:id="@+id/MiaoReminder"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:text="miao"
+                android:onClick="onMainClick"/>
+            <Button
+                android:id="@+id/WangReminder"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="wang"
+                android:onClick="onMainClick"/>
         </LinearLayout>
     </LinearLayout>
 

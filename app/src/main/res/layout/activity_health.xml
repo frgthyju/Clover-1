@@ -21,7 +21,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/health1"
+            android:id="@+id/menses"
             android:layout_width="100dp"
             android:layout_height="100dp" />
         <Button

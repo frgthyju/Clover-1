@@ -1,17 +1,20 @@
 package com.clover.ui;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import com.clover.R;
+import com.clover.entities.User;
+
+import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
 
 
-public class HealthActivity extends ActionBarActivity {
+public class HealthActivity extends BaseActivity {
 
     private Button ib_emm;//按钮
     private Button ib_disease;//按钮
@@ -20,7 +23,7 @@ public class HealthActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health);
 
-        ib_emm = (Button)findViewById(R.id.health1);
+        ib_emm = (Button)findViewById(R.id.menses);
         ib_disease = (Button)findViewById(R.id.disease);
         ib_emm.setOnClickListener(new ImageButtonClickListener());
         ib_disease.setOnClickListener(new ImageButtonClickListener());
@@ -30,11 +33,16 @@ public class HealthActivity extends ActionBarActivity {
      * 健康页面中的按钮点击事件
      */
     private class ImageButtonClickListener implements View.OnClickListener{
+        Intent intent;
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.health1:
+                case R.id.menses:
+                    intent = new Intent(HealthActivity.this, MensesActivity.class);
+                    startActivity(intent);
                     break;
                 case R.id.disease:
+                    intent = new Intent(HealthActivity.this, DiseaseActivity.class);
+                    startActivity(intent);
                     break;
             }
         }
@@ -45,28 +53,6 @@ public class HealthActivity extends ActionBarActivity {
      */
     public void back(View view){
         this.finish();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_health, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
 }
