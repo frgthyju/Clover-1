@@ -32,7 +32,6 @@ public class MensesActivity extends BaseActivity {
     private CloverApplication application;
     String msg;
     String MENSES_COME_ACTION = "MENSES_COME";
-    String MENSES_GONE_ACTION = "MENSES_GONE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,10 +63,12 @@ public class MensesActivity extends BaseActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if(action.equals(MENSES_COME_ACTION)){
-
-            }else if(action.equals(MENSES_GONE_ACTION)){
-
+            int extra = intent.getExtras().getInt("key");
+            switch (extra){
+                case 1:
+                    break;
+                case 2:
+                    break;
             }
             //
             abortBroadcast();
@@ -79,7 +80,6 @@ public class MensesActivity extends BaseActivity {
     public void registerBoradcastReceiver(){
         IntentFilter myIntentFilter = new IntentFilter();
         myIntentFilter.addAction(MENSES_COME_ACTION);
-        myIntentFilter.addAction(MENSES_GONE_ACTION);
         //注册广播
         registerReceiver(mensesReminderReceiver, myIntentFilter);
     }

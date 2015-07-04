@@ -1,92 +1,98 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#fff"
     android:orientation="vertical" >
-
-    <ImageView
+    <RelativeLayout
+        android:id="@+id/layout_backgroud"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="#b4a7d6"/>
+        android:layout_alignParentTop="true">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#b4a7d6"/>
+
+        <LinearLayout
+            android:id="@+id/sleep_reminder_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone">
+            <include layout="@layout/include_interact_sleep_reminder"/>
+        </LinearLayout>
+        </RelativeLayout>
+    <Button
+        android:id="@+id/anniversary"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:text="Anniversary"
+        android:layout_below="@+id/layout_backgroud"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="onMainClick"/>
+    <Button
+        android:id="@+id/health"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_below="@id/layout_backgroud"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentRight="true"
+        android:text="Health"
+        android:onClick="onMainClick"/>
 
     <LinearLayout
-        android:id="@+id/sleep_reminder_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone">
-        <include layout="@layout/include_interact_sleep_reminder"/>
-        </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal">
-        <Button
-            android:id="@+id/anniversary"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:text="Anniversary"
-            android:onClick="onMainClick"/>
-        <Button
-            android:id="@+id/health"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_marginLeft="40dp"
-            android:text="Health"
-            android:onClick="onMainClick"/>
-        </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@id/health"
         android:layout_marginTop="15dp"
         android:orientation="vertical"
         android:layout_gravity="center_horizontal">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal">
-            <Button
-                android:id="@+id/SleepReminder"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="sleep"
-                android:onClick="onMainClick"/>
-            <Button
-                android:id="@+id/EatReminder"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="eat"
-                android:onClick="onMainClick"/>
-            <Button
-                android:id="@+id/MissReminder"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="miss"
-                android:layout_marginLeft="10dp"
-                android:onClick="onMainClick"/>
-            <Button
-                android:id="@+id/ApologizeReminder"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="apologize"
-                android:onClick="onMainClick"/>
-            <Button
-                android:id="@+id/KissReminder"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="kiss"
-                android:layout_marginLeft="10dp"
-                android:onClick="onMainClick"/>
-            <Button
-                android:id="@+id/HugReminder"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="hug"
-                android:onClick="onMainClick"/>
-            </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+        <Button
+            android:id="@+id/SleepReminder"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="sleep"
+            android:onClick="onMainClick"/>
+        <Button
+            android:id="@+id/EatReminder"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="eat"
+            android:onClick="onMainClick"/>
+        <Button
+            android:id="@+id/MissReminder"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="miss"
+            android:layout_marginLeft="10dp"
+            android:onClick="onMainClick"/>
+        <Button
+            android:id="@+id/ApologizeReminder"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="apologize"
+            android:onClick="onMainClick"/>
+        <Button
+            android:id="@+id/KissReminder"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="kiss"
+            android:layout_marginLeft="10dp"
+            android:onClick="onMainClick"/>
+        <Button
+            android:id="@+id/HugReminder"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="hug"
+            android:onClick="onMainClick"/>
+    </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -136,4 +142,15 @@
 
 
 
-</LinearLayout>
+
+
+    <!--
+
+
+
+
+
+-->
+
+
+</RelativeLayout>

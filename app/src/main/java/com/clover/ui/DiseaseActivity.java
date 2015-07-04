@@ -68,13 +68,17 @@ public class DiseaseActivity extends BaseActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if(action.equals(DISEASE_COME_ACTION)){
-                lv_drugReminder.setVisibility(View.VISIBLE);
-            }else if(action.equals(DISEASE_GONE_ACTION)){
-                lv_drugReminder.setVisibility(View.GONE);
+            int extra = intent.getExtras().getInt("key");
+            switch(extra){
+                case 1:
+                    lv_drugReminder.setVisibility(View.VISIBLE);
+                    break;
+                case 2:
+                    lv_drugReminder.setVisibility(View.GONE);
+                    break;
             }
             //终结广播
-            //abortBroadcast();
+            abortBroadcast();
         }
     };
     /**
@@ -83,7 +87,6 @@ public class DiseaseActivity extends BaseActivity {
     public void registerBoradcastReceiver(){
         IntentFilter myIntentFilter = new IntentFilter();
         myIntentFilter.addAction(DISEASE_COME_ACTION);
-        myIntentFilter.addAction(DISEASE_GONE_ACTION);
         //注册广播
         registerReceiver(diseaseReminderReceiver, myIntentFilter);
     }

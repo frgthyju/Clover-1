@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="80dp"
+    android:gravity="center_vertical"
+    android:minHeight="80dp"
+    android:background="@color/color_transparent_bg"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:minHeight="80dp"
-        android:background="@color/color_transparent_bg"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp" >
         <ImageView
             android:id="@+id/loverimg"
             android:layout_width="50dp"
@@ -48,6 +44,5 @@
             android:layout_marginRight="10dp"
             android:text="@string/getupreminder"
             android:onClick="onMainClick"/>
-    </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>
