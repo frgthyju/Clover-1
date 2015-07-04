@@ -1,10 +1,9 @@
 <resources>
-
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="alertDialogProTheme">@style/myDialogTheme</item>
     </style>
+
     <style name="myDialogTheme" parent="Theme.AlertDialogPro.Material.Light">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
@@ -65,20 +64,16 @@
         <item name="android:contentDescription">@string/app_name</item>
     </style>
 
-    <style name="Smile.ImageView.Photo_Large">
-        <item name="android:layout_width">75dp</item>
-        <item name="android:layout_height">75dp</item>
-        <item name="android:scaleType">fitXY</item>
-    </style>
+
     <style name="Smile.ImageView.Photo_Middle">
-        <item name="android:layout_width">60dp</item>
-        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_width">55dp</item>
+        <item name="android:layout_height">55dp</item>
         <item name="android:scaleType">fitXY</item>
     </style>
 
     <style name="Smile.ImageView.Photo_Small">
-        <item name="android:layout_width">40dp</item>
-        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_width">35dp</item>
+        <item name="android:layout_height">35dp</item>
         <item name="android:scaleType">fitXY</item>
     </style>
 

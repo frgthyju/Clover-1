@@ -7,10 +7,10 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.clover.R;
 import com.clover.adapter.MSListViewAdapter;
@@ -27,21 +27,21 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 
 public class ChatActivity extends BaseActivity {
-    private Button bt_send;
+    private ImageView iv_send;
     private EditText et_input;
     private ListView mListView;
-    private String objectId;
     private String msg_content;
+    private ImageView iv_back;
+    private TextView tv_name;
     private MSListViewAdapter adapter;
     private CloverApplication application;
     private List<BmobMsg> messageList;
     private User targetUser; //对方的用户
-    User woman;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+       // requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_chat);
         application = (CloverApplication) getApplication();
         checkSetting();
@@ -50,12 +50,14 @@ public class ChatActivity extends BaseActivity {
 
         messageList = BmobDB.create(this).queryMessages(targetUser.getObjectId(), 1);
 
+        initToolbar("聊天",new Intent(this, MainActivity.class), this);
         initView();         //初始化视图
         adapter = new MSListViewAdapter(ChatActivity.this, messageList);
         mListView.setAdapter(adapter);
         mListView.setSelection(adapter.getCount() - 1);
 
-        initMsgData();      //加载数据
+
+       // initMsgData();      //加载数据
         ShowLog("设置adapter");
 
         //注册接受广播
@@ -67,11 +69,23 @@ public class ChatActivity extends BaseActivity {
     }
 
     private void initView(){
-        bt_send = (Button) findViewById(R.id.btn_send);
+        iv_send = (ImageView) findViewById(R.id.iv_send);
         et_input = (EditText) findViewById(R.id.et_sendmessage);
         mListView = (ListView) findViewById(R.id.listview);
+      //  iv_back = (ImageView) findViewById(R.id.iv_back);
+      //  tv_name = (TextView) findViewById(R.id.tv_name);
 
-        bt_send.setOnClickListener(new View.OnClickListener() {
+       // tv_name.setText("chatting");
+
+       /* iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChatActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });*/
+        iv_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 msg_content = et_input.getText().toString();
@@ -79,7 +93,7 @@ public class ChatActivity extends BaseActivity {
                     ShowToast("请输入信息内容");
                     return;
                 }
-                BmobMsg msg = (BmobMsg) BmobMsg.createTextSendMsg(ChatActivity.this, targetUser.getObjectId(), msg_content);
+                BmobMsg msg = BmobMsg.createTextSendMsg(ChatActivity.this, targetUser.getObjectId(), msg_content);
                 msg.setExtra("chat");
 
                 ShowLog("添加消息内容：" + msg.getContent());

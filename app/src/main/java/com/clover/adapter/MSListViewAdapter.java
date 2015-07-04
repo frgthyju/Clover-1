@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.clover.R;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import cn.bmob.im.BmobUserManager;
@@ -95,7 +97,8 @@ public class MSListViewAdapter extends BaseAdapter{
       //      viewHolder = (ViewHolder) convertView.getTag();
       //  }
         //时间格式化
-        viewHolder.tvSendTime.setText(entity.getCreatedAt());
+
+        viewHolder.tvSendTime.setText(getStrTime(entity.getMsgTime()));
         viewHolder.tvContent.setText(entity.getContent());
         return convertView;
     }
@@ -103,5 +106,15 @@ public class MSListViewAdapter extends BaseAdapter{
     static class ViewHolder {
         public TextView tvSendTime;
         public TextView tvContent;
+    }
+
+    // 将时间戳转为字符串
+    public static String getStrTime(String cc_time) {
+        String re_StrTime = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH时mm分ss秒");
+// 例如：cc_time=1291778220
+        long lcc_time = Long.valueOf(cc_time);
+        re_StrTime = sdf.format(new Date(lcc_time * 1000L));
+        return re_StrTime;
     }
 }

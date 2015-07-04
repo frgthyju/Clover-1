@@ -1,26 +1,11 @@
 package com.clover.ui;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.MotionEvent;
-import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -42,6 +27,8 @@ public class UserInfoUpdateActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info_update);
+
+        initToolbar("修改个人资料", new Intent(this, MainActivity.class), this);
 
         rv_head = (RelativeLayout)findViewById(R.id.layout_head);
         rv_nick = (RelativeLayout)findViewById(R.id.layout_nick);

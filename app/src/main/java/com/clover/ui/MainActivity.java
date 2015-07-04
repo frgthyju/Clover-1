@@ -18,7 +18,6 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,13 +30,13 @@ import android.widget.TextView;
 
 import com.clover.R;
 import com.clover.entities.User;
+import com.clover.net.BmobRequest;
 import com.clover.ui.frgms.GamePage;
 import com.clover.ui.frgms.MainPage;
 import com.clover.ui.frgms.UserPage;
 import com.clover.utils.CloverApplication;
 import com.clover.utils.Config;
 import com.clover.utils.TypegifView;
-import com.clover.net.BmobRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +73,7 @@ public class MainActivity extends BaseActivity {
             finish();
         }else{
             application = (CloverApplication)getApplication();
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
+           // requestWindowFeature(Window.FEATURE_NO_TITLE);
             setContentView(R.layout.activity_main);
 
             chatManager = BmobChatManager.getInstance(this);
@@ -98,7 +97,7 @@ public class MainActivity extends BaseActivity {
      */
     private void InitViewPager() {
         mPager = (ViewPager) findViewById(R.id.vPager);
-        fragments = new ArrayList<Fragment>();
+        fragments = new ArrayList<>();
         Fragment fragment1 = new MainPage();
         Fragment fragment2 = new GamePage();
         Fragment fragment3 = new UserPage();
@@ -367,25 +366,17 @@ public class MainActivity extends BaseActivity {
      * Setting打开设置界面
      * Quit退出当前账号
      */
-    public void onUserClick(View view){
+   /* public void onUserClick(View view){
         Intent intent;
         switch (view.getId()){
-            case R.id.editUserInfo:
-                intent = new Intent(this, UserInfoUpdateActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.mylover:
-                break;
-            case R.id.setting:
-                break;
-            case R.id.quit:
+            case R.id.ib_logout:
                 userManager.logout();
                 intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 finish();
                 break;
         }
-    }
+    }*/
     /**
      * 根据id查询用户
      */

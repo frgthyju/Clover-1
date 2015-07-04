@@ -5,6 +5,7 @@
     android:background="@color/theme_bg_color"
     android:orientation="vertical" >
 
+    <include layout="@layout/toolbar_layout"/>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

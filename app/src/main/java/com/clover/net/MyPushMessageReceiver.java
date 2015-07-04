@@ -52,7 +52,7 @@ public class MyPushMessageReceiver extends BroadcastReceiver {
         try {
             JSONObject jsonObject = new JSONObject(json);
             String ex = jsonObject.getString("ex");
-            if(ex.equals("ex")){
+            if(ex.equals("chat")){
                 BmobChatManager.getInstance(context).createReceiveMsg(json, new OnReceiveListener() {
                     @Override
                     public void onSuccess(BmobMsg bmobMsg) {

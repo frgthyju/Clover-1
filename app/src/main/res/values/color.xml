@@ -33,4 +33,9 @@
 
     <color name="common_bg">#fcfcfc</color>
 
+
+    <color name="toolbar_bg_color">#fbbbba</color>
+    <color name="top_toolbar_color">#FFE4E1</color>
+    <color name="material_green_A200">#FD87A9</color>
+
 </resources>
