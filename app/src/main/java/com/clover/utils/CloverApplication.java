@@ -12,10 +12,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.utils.StorageUtils;
-
 import java.io.File;
 
-import cn.bmob.im.BmobChat;
 
 /**
  * Created by zpfang on 2015/6/30.
@@ -30,7 +28,7 @@ public class CloverApplication extends Application{
         // TODO Auto-generated method stub
         super.onCreate();
         // 是否开启debug模式--默认开启状态
-        BmobChat.DEBUG_MODE = true;
+        //BmobChat.DEBUG_MODE = true;
         application = this;
         initImageLoader(getApplicationContext());
     }

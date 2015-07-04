@@ -475,53 +475,6 @@ public class MainActivity extends BaseActivity {
                 case 13:
                     break;
             }
-            /*
-            if(action.equals(Config.SLEEP_ACTION)){
-                sleepReminderLayout = (LinearLayout)findViewById(R.id.sleep_reminder_layout);
-                sleepReminderLayout.setVisibility(View.VISIBLE);
-            }else if(action.equals(Config.MISS_ACTION)){
-                final Dialog myDialog = CreatMyDialog(R.layout.dialog_miss_layout);
-                myDialog.show();
-                TimerTask task = new TimerTask() {
-                    @Override
-                    public void run() {
-                        myDialog.dismiss();
-                    }
-                };
-                new Timer().schedule(task,1000);
-            }else if(action.equals(Config.APOLOGIZE_ACTION)){
-                final Dialog myDialog = CreatMyDialog(R.layout.dialog_miss_layout);
-                myDialog.show();
-                TimerTask task = new TimerTask() {
-                    @Override
-                    public void run() {
-                        myDialog.dismiss();
-                    }
-                };
-                new Timer().schedule(task,1000);
-            }else if(action.equals(Config.BORING_ACTION)){
-                final Dialog myDialog = CreatMyDialog(R.layout.dialog_miss_layout);
-                myDialog.show();
-                TimerTask task = new TimerTask() {
-                    @Override
-                    public void run() {
-                        myDialog.dismiss();
-                    }
-                };
-                new Timer().schedule(task,1000);
-            }else if(action.equals(Config.DO_ACTION)){
-                final Dialog myDialog = CreatMyDialog(R.layout.dialog_miss_layout);
-                myDialog.show();
-                TimerTask task = new TimerTask() {
-                    @Override
-                    public void run() {
-                        myDialog.dismiss();
-                    }
-                };
-                new Timer().schedule(task,1000);
-            }
-            */
-            //终结广播
             abortBroadcast();
         }
     };
