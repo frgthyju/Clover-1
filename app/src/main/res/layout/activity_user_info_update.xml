@@ -31,7 +31,7 @@
                 android:orientation="horizontal" >
 
                 <ImageView
-                    android:id="@+id/iv_set_avator"
+                    android:id="@+id/avator"
                     style="@style/Smile.ImageView"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
@@ -68,7 +68,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/tv_set_nick"
+                    android:id="@+id/nick"
                     style="@style/Smile.TextView._Black"
                     android:drawablePadding="10dp" />
 
@@ -105,13 +105,43 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/tv_set_age"
+                    android:id="@+id/age"
                     style="@style/Smile.TextView._Black"
                     android:layout_marginRight="20dp"
                     android:drawablePadding="10dp" />
 
             </LinearLayout>
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/layout_sex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/about_mid_bg"
+            android:padding="10dp" >
+
+            <TextView
+                style="@style/Smile.TextView._Black"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/add_sex" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/sex"
+                    style="@style/Smile.TextView._Black"
+                    android:layout_marginRight="20dp"
+                    android:drawablePadding="10dp" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
 
         <Button
             android:id="@+id/btn_add_friend"
@@ -124,53 +154,5 @@
             android:text="@string/add_friend"
             android:visibility="gone" />
         </LinearLayout>
-    <LinearLayout
-        android:id="@+id/avator_select"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:visibility="invisible"
-        android:background="@drawable/pop_bg"
-        android:orientation="vertical" >
-
-        <RelativeLayout
-            android:id="@+id/layout_photo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:clickable="true" >
-
-            <TextView
-                style="@style/Smile.TextView._Black"
-                android:layout_centerInParent="true"
-                android:layout_margin="10dp"
-                android:drawablePadding="20dp"
-                android:gravity="center"
-                android:text="@string/pop_photo" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@drawable/base_horizontal_line" >
-        </View>
-
-        <RelativeLayout
-            android:id="@+id/layout_choose"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:clickable="true" >
-
-            <TextView
-                style="@style/Smile.TextView._Black"
-                android:layout_centerInParent="true"
-                android:layout_margin="10dp"
-                android:drawablePadding="20dp"
-                android:gravity="center"
-                android:text="@string/pop_choose" />
-        </RelativeLayout>
-    </LinearLayout>
-
 
 </RelativeLayout>

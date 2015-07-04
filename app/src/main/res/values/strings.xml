@@ -53,13 +53,22 @@
     <string name="add_name">账号</string>
     <string name="add_name_hint">请输入昵称&#8230;</string>
     <string name="add_age">年龄</string>
+    <string name="add_sex">性别</string>
     <string name="blacklist">黑名单</string>
     <string name="chat">发起会话</string>
     <string name="add_friend">添加好友</string>
     <string name="black_tips">已添加至黑名单，你将不再收到对方的消息!</string>
-    <string name="pop_photo">拍照</string>
-    <string name="pop_choose">从相册选择</string>
-
+    <string name="takephoto">拍照</string>
+    <string name="choosefrommibile">从相册选择</string>
+    <string name="finish">完成</string>
+    <string name="inputnick">请输入昵称</string>
+    <string name="pleaseinputnick">请输入昵称</string>
+    <string name="updatesuccess">修改成功</string>
+    <string name="updatefailure">修改失败</string>
+    <string name="wrongbirthdate">您输入的出生日期在今天之后，这是不可能的，请重新输入</string>
+    <string name="pleaseselectsex">请选择性别</string>
+    <string name="man">男</string>
+    <string name="woman">女</string>
 
     <string name="title_activity_anniversary">AnniversaryActivity</string>
     <string name="title_activity_health">HealthActivity</string>
@@ -74,4 +83,5 @@
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_edit_user_info">EditUserInfoActivity</string>
     <string name="title_activity_menses">MensesActivity</string>
+    <string name="title_activity_update_user_nick">UpdateUserNickActivity</string>
 </resources>

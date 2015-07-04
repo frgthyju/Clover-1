@@ -278,8 +278,6 @@ public class MainActivity extends BaseActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 pushMessageToLover(msg,tag);
-                                sleepReminderLayout = (LinearLayout)findViewById(R.id.sleep_reminder_layout);
-                                sleepReminderLayout.setVisibility(View.GONE);
                             }
                         })
                         .show();
@@ -403,10 +401,81 @@ public class MainActivity extends BaseActivity {
     /**
      * 广播接收，对方睡眠提醒
      */
-    private BroadcastReceiver sleepReminderReceiver = new BroadcastReceiver(){
+    private BroadcastReceiver mainReminderReceiver = new BroadcastReceiver(){
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
+
+            int extra = intent.getExtras().getInt("key");
+            switch(extra){
+                case 1:
+                    sleepReminderLayout = (LinearLayout)findViewById(R.id.sleep_reminder_layout);
+                    sleepReminderLayout.setVisibility(View.VISIBLE);
+                    break;
+                case 2:
+                    sleepReminderLayout = (LinearLayout)findViewById(R.id.sleep_reminder_layout);
+                    sleepReminderLayout.setVisibility(View.GONE);
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    final Dialog missDialog = CreatMyDialog(R.layout.dialog_miss_layout);
+                    missDialog.show();
+                    TimerTask missTask = new TimerTask() {
+                        @Override
+                        public void run() {
+                            missDialog.dismiss();
+                        }
+                    };
+                    new Timer().schedule(missTask,1000);
+                    break;
+                case 7:
+                    final Dialog apologizeDialog = CreatMyDialog(R.layout.dialog_miss_layout);
+                    apologizeDialog.show();
+                    TimerTask apologizeTask = new TimerTask() {
+                        @Override
+                        public void run() {
+                            apologizeDialog.dismiss();
+                        }
+                    };
+                    new Timer().schedule(apologizeTask,1000);
+                    break;
+                case 8:
+                    final Dialog boringDialog = CreatMyDialog(R.layout.dialog_miss_layout);
+                    boringDialog.show();
+                    TimerTask boringTask = new TimerTask() {
+                        @Override
+                        public void run() {
+                            boringDialog.dismiss();
+                        }
+                    };
+                    new Timer().schedule(boringTask,1000);
+                    break;
+                case 9:
+                    final Dialog doDialog = CreatMyDialog(R.layout.dialog_miss_layout);
+                    doDialog.show();
+                    TimerTask doTask = new TimerTask() {
+                        @Override
+                        public void run() {
+                            doDialog.dismiss();
+                        }
+                    };
+                    new Timer().schedule(doTask,1000);
+                    break;
+                case 10:
+                    break;
+                case 11:
+                    break;
+                case 12:
+                    break;
+                case 13:
+                    break;
+            }
+            /*
             if(action.equals(Config.SLEEP_ACTION)){
                 sleepReminderLayout = (LinearLayout)findViewById(R.id.sleep_reminder_layout);
                 sleepReminderLayout.setVisibility(View.VISIBLE);
@@ -451,10 +520,20 @@ public class MainActivity extends BaseActivity {
                 };
                 new Timer().schedule(task,1000);
             }
+            */
             //终结广播
             abortBroadcast();
         }
     };
+    /**
+     * 注册该广播接收
+     */
+    public void registerBoradcastReceiver(){
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction(Config.SLEEP_ACTION);
+        //注册广播
+        registerReceiver(mainReminderReceiver, myIntentFilter);
+    }
 
     public Dialog CreatMyDialog(int ResId){
         Dialog myDialog = new Dialog(this);
@@ -504,34 +583,11 @@ public class MainActivity extends BaseActivity {
         return myDialog;
     }
 
-
-
-    /**
-     * 注册该广播接收
-     */
-    public void registerBoradcastReceiver(){
-        IntentFilter myIntentFilter = new IntentFilter();
-        myIntentFilter.addAction(Config.SLEEP_ACTION);
-        myIntentFilter.addAction(Config.GETUP_ACTION);
-        myIntentFilter.addAction(Config.EAT_ACTION);
-        myIntentFilter.addAction(Config.GAME_ACTION);
-        myIntentFilter.addAction(Config.SHOP_ACTION);
-        myIntentFilter.addAction(Config.MISS_ACTION);
-        myIntentFilter.addAction(Config.APOLOGIZE_ACTION);
-        myIntentFilter.addAction(Config.BORING_ACTION);
-        myIntentFilter.addAction(Config.DO_ACTION);
-        myIntentFilter.addAction(Config.KISS_ACTION);
-        myIntentFilter.addAction(Config.HUG_ACTION);
-        myIntentFilter.addAction(Config.MIAO_ACTION);
-        myIntentFilter.addAction(Config.WANG_ACTION);
-        //注册广播
-        registerReceiver(sleepReminderReceiver, myIntentFilter);
-    }
-
     /**
      * 消息推送函数
      */
     public void pushMessageToLover(String msg, String tag){
+        User user = application.getM_user();
         BmobRequest.pushMessageToLover(msg,tag,this,application.getM_user().getObjectId(),application.getM_user(),chatManager);
     }
 
@@ -539,7 +595,7 @@ public class MainActivity extends BaseActivity {
 
         BmobQuery<User> query = new BmobQuery<>();
         query.setCachePolicy(BmobQuery.CachePolicy.CACHE_THEN_NETWORK);
-        query.addWhereEqualTo("username","11");
+        query.addWhereEqualTo("username","1238");
         query.findObjects(this, new FindListener<User>() {
             @Override
             public void onSuccess(List<User> list) {

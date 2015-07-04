@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.clover.R;
+import com.clover.utils.Config;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,31 +25,12 @@ import cn.bmob.im.inteface.OnReceiveListener;
 public class MyPushMessageReceiver extends BroadcastReceiver {
 
     String tag = null;
-    String SLEEP_ACTION = "SLEEP_ACTION";
-    String GETUP_ACTION = "GETUP_ACTION";
-    String EAT_ACTION = "EAT_ACTION";
-    String GAME_ACTION = "GAME_ACTION";
-    String SHOP_ACTION = "SHOP_ACTION";
-    String MISS_ACTION = "MISS_ACTION";
-    String APOLOGIZE_ACTION = "APOLOGIZE_ACTION";
-    String BORING_ACTION = "BORING_ACTION";
-    String DO_ACTION = "DO_ACTION";
-    String KISS_ACTION = "KISS_ACTION";
-    String HUG_ACTION = "HUG_ACTION";
-    String MIAO_ACTION = "MIAO_ACTION";
-    String WANG_ACTION = "WANG_ACTION";
-    String MENSES_COME_ACTION = "MENSES_COME";
-    String MENSES_GONE_ACTION = "MENSES_GONE";
-    String DISEASE_COME_ACTION = "DISEASE_COME";
-    String DISEASE_GONE_ACTION = "DISEASE_GONE";
-    String DRUG_ACTION = "DRUG";
     String message;
 
     @SuppressWarnings("deprecation")
     @Override
     public void onReceive(final Context context, Intent intent) {
         String json = intent.getStringExtra("msg");
-        Toast.makeText(context, json, Toast.LENGTH_LONG).show();
         try {
             JSONObject jsonObject = new JSONObject(json);
             String ex = jsonObject.getString("ex");
@@ -69,63 +51,84 @@ public class MyPushMessageReceiver extends BroadcastReceiver {
                     }
                 });
             }else{
-                if (json.contains("SLEEP")) {
-                    tag = SLEEP_ACTION;
+
+                int extra = 0;
+                if (ex.equals("SLEEP")) {
+                    tag = Config.SLEEP_ACTION;
+                    extra = 1;
                     message = context.getResources().getString(R.string.sleep_msg);
-                } else if (json.contains("GETUP")) {
-                    tag = GETUP_ACTION;
+                } else if (ex.equals("GETUP")) {
+                    tag = Config.SLEEP_ACTION;
+                    extra = 2;
                     message = context.getResources().getString(R.string.getup_mas);
-                } else if (json.contains("EAT")) {
-                    tag = EAT_ACTION;
+                } else if (ex.equals("EAT")) {
+                    tag = Config.SLEEP_ACTION;
+                    extra = 3;
                     message = context.getResources().getString(R.string.eat_msg);
-                } else if (json.contains("GAME")) {
-                    tag = GAME_ACTION;
+                } else if (ex.equals("GAME")) {
+                    tag = Config.SLEEP_ACTION;
+                    extra = 4;
                     message = context.getResources().getString(R.string.game_msg);
-                } else if (json.contains("SHOP")) {
-                    tag = SHOP_ACTION;
+                } else if (ex.equals("SHOP")) {
+                    tag = Config.SLEEP_ACTION;
+                    extra = 5;
                     message = context.getResources().getString(R.string.shop_msg);
-                } else if (json.contains("MISS")) {
-                    tag = MISS_ACTION;
+                } else if (ex.equals("MISS")) {
+                    tag = Config.SLEEP_ACTION;
+                    extra = 6;
                     message = context.getResources().getString(R.string.miss_msg);
-                } else if (json.contains("WANG")) {
-                    tag = WANG_ACTION;
-                    message = context.getResources().getString(R.string.wang_msg);
-                } else if (json.contains("APOLOGIZE")) {
-                    tag = APOLOGIZE_ACTION;
+                } else if (ex.equals("APOLOGIZE")) {
+                    tag = Config.SLEEP_ACTION;
+                    extra = 7;
                     message = context.getResources().getString(R.string.apologize_msg);
-                } else if (json.contains("BORING")) {
-                    tag = BORING_ACTION;
+                } else if (ex.equals("BORING")) {
+                    tag = Config.SLEEP_ACTION;
+                    extra = 8;
                     message = context.getResources().getString(R.string.boring_msg);
-                } else if (json.contains("DO")) {
-                    tag = DO_ACTION;
+                } else if (ex.equals("DO")) {
+                    tag = Config.SLEEP_ACTION;
+                    extra = 9;
                     message = context.getResources().getString(R.string.do_msg);
-                } else if (json.contains("KISS")) {
-                    tag = KISS_ACTION;
+                } else if (ex.equals("KISS")) {
+                    tag = Config.SLEEP_ACTION;
+                    extra = 10;
                     message = context.getResources().getString(R.string.kiss_msg);
-                } else if (json.contains("HUG")) {
-                    tag = HUG_ACTION;
+                } else if (ex.equals("HUG")) {
+                    tag = Config.SLEEP_ACTION;
+                    extra = 11;
                     message = context.getResources().getString(R.string.hug_msg);
-                } else if (json.contains("MIAO")) {
-                    tag = MIAO_ACTION;
+                } else if (ex.equals("MIAO")) {
+                    tag = Config.SLEEP_ACTION;
+                    extra = 12;
                     message = context.getResources().getString(R.string.miao_msg);
-                } else if (json.contains("MENSES_COME")) {
-                    tag = MENSES_COME_ACTION;
+                } else if (ex.equals("WANG")) {
+                    tag = Config.SLEEP_ACTION;
+                    extra = 13;
+                    message = context.getResources().getString(R.string.wang_msg);
+                } else if (ex.equals("MENSES_COME")) {
+                    tag = Config.MENSES_COME_ACTION;
+                    extra = 1;
                     message = context.getResources().getString(R.string.menses_coming_msg);
-                } else if (json.contains("MENSES_GONE")) {
-                    tag = MENSES_GONE_ACTION;
+                } else if (ex.equals("MENSES_GONE")) {
+                    tag = Config.MENSES_COME_ACTION;
+                    extra = 2;
                     message = context.getResources().getString(R.string.menses_going_msg);
-                } else if (json.contains("DISEASE_COME")) {
-                    tag = DISEASE_COME_ACTION;
+                } else if (ex.equals("DISEASE_COME")) {
+                    tag = Config.DISEASE_COME_ACTION;
+                    extra = 1;
                     message = context.getResources().getString(R.string.disease_come_msg);
-                } else if (json.contains("DISEASE_GONE")) {
-                    tag = DISEASE_GONE_ACTION;
+                } else if (ex.equals("DISEASE_GONE")) {
+                    tag = Config.DISEASE_COME_ACTION;
+                    extra = 2;
                     message = context.getResources().getString(R.string.disease_gone_msg);
-                } else if (json.contains("DRUG")) {
-                    tag = DRUG_ACTION;
+                } else if (ex.equals("DRUG")) {
+                    tag = Config.DISEASE_COME_ACTION;
+                    extra = 3;
                     message = context.getResources().getString(R.string.eatdrug);
                 }
-                Intent Reminder = new Intent(tag);
-                context.sendBroadcast(Reminder);
+                Intent reminder = new Intent(tag);
+                reminder.putExtra("key",extra);
+                context.sendBroadcast(reminder);
 
                 // 发送通知
                 NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

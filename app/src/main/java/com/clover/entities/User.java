@@ -6,7 +6,7 @@ public class User extends BmobChatUser{
 
     private static final long serialVersionUID = 1L;
 
-    private Integer age = 18;
+    private Integer age;
 
     private Boolean sex;    //男-false-女-true
 

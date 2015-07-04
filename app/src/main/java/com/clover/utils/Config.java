@@ -5,16 +5,20 @@ package com.clover.utils;
  */
 public class Config {
     public static String SLEEP_ACTION = "SLEEP_ACTION";
-    public static String GETUP_ACTION = "GETUP_ACTION";
-    public static String EAT_ACTION = "EAT_ACTION";
-    public static String GAME_ACTION = "GAME_ACTION";
-    public static String SHOP_ACTION = "SHOP_ACTION";
-    public static String MISS_ACTION = "MISS_ACTION";
-    public static String APOLOGIZE_ACTION = "APOLOGIZE_ACTION";
-    public static String BORING_ACTION = "BORING_ACTION";
-    public static String DO_ACTION = "DO_ACTION";
-    public static String KISS_ACTION = "KISS_ACTION";
-    public static String HUG_ACTION = "HUG_ACTION";
-    public static String MIAO_ACTION = "MIAO_ACTION";
-    public static String WANG_ACTION = "WANG_ACTION";
+    public static String MENSES_COME_ACTION = "MENSES_COME";
+    public static String DISEASE_COME_ACTION = "DISEASE_COME";
+    /**
+     * 我的头像保存目录
+     */
+    public static String MyAvatarDir = "/sdcard/bmobimdemo/avatar/";
+    /**
+     * 拍照回调
+     */
+    public static final int REQUESTCODE_UPLOADAVATAR_CAMERA = 1;//拍照修改头像
+    public static final int REQUESTCODE_UPLOADAVATAR_LOCATION = 2;//本地相册修改头像
+    public static final int REQUESTCODE_UPLOADAVATAR_CROP = 3;//系统裁剪头像
+
+    public static final int REQUESTCODE_TAKE_CAMERA = 0x000001;//拍照
+    public static final int REQUESTCODE_TAKE_LOCAL = 0x000002;//本地图片
+    public static final int REQUESTCODE_TAKE_LOCATION = 0x000003;//位置
 }
