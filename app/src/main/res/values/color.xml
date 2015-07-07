@@ -38,4 +38,10 @@
     <color name="top_toolbar_color">#FFE4E1</color>
     <color name="material_green_A200">#FD87A9</color>
 
+    <color name="grey_bg">#EDEDED</color>
+    <color name="white_bg">#ffffff</color>
+    <color name="grey2_bg">#C2C2C2</color>
+
+    <color name="guide_bg">#f0b4b3</color>
+
 </resources>

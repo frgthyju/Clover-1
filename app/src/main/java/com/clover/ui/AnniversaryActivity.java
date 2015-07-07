@@ -1,5 +1,6 @@
 package com.clover.ui;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,7 +16,7 @@ import java.util.Date;
 import com.clover.R;
 
 
-public class AnniversaryActivity extends ActionBarActivity implements DatePickerDialog.OnDateSetListener{
+public class AnniversaryActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener{
 
     private TextView txt_timeUntilNow, txt_anniversaryDate;//到现在的天数，纪念日的日期
     @Override
@@ -23,6 +24,7 @@ public class AnniversaryActivity extends ActionBarActivity implements DatePicker
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anniversary);
 
+        initToolbar(getResources().getString(R.string.title_activity_anniversary),new Intent(this, MainActivity.class), this);
         txt_timeUntilNow = (TextView)findViewById(R.id.timeUntilNow);
         txt_anniversaryDate = (TextView)findViewById(R.id.anniversaryDate);
 
@@ -41,14 +43,6 @@ public class AnniversaryActivity extends ActionBarActivity implements DatePicker
             }
         });
 
-    }
-
-    /**
-     * 返回
-     * @param view
-     */
-    public void btnback(View view){
-        this.finish();
     }
 
     @Override
@@ -81,25 +75,4 @@ public class AnniversaryActivity extends ActionBarActivity implements DatePicker
         return js;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_anniversary, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

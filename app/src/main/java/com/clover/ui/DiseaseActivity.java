@@ -14,14 +14,12 @@ import android.widget.LinearLayout;
 
 import com.clover.R;
 import com.clover.net.BmobRequest;
-import com.clover.utils.CloverApplication;
 
 public class DiseaseActivity extends BaseActivity {
 
     private Button btn_diseaseReminder;
     private Button btn_sendDrugReminder;
     private LinearLayout lv_drugReminder;
-    private CloverApplication application;
     boolean tag = true;
     String msg;
     String DISEASE_COME_ACTION = "DISEASE_COME";
@@ -31,7 +29,7 @@ public class DiseaseActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disease);
 
-        application = (CloverApplication)getApplication();
+        initToolbar(getResources().getString(R.string.title_activity_disease),new Intent(this, HealthActivity.class), this);
         btn_diseaseReminder = (Button)findViewById(R.id.diseaseReminder);
         btn_sendDrugReminder = (Button)findViewById(R.id.sendDrugReminder);
         lv_drugReminder = (LinearLayout)findViewById(R.id.DrugReminderLayout);
@@ -40,12 +38,12 @@ public class DiseaseActivity extends BaseActivity {
             public void onClick(View v) {
                 if(tag) {
                     msg = getResources().getString(R.string.disease_come_msg);
-                    BmobRequest.pushMessageToLover(msg, "DISEASE_COME", DiseaseActivity.this, application.getM_user().getObjectId(), application.getM_user(), chatManager);
+                    BmobRequest.pushMessageToLover(msg, "DISEASE_COME", DiseaseActivity.this, application.getOne_user().getObjectId(), application.getOne_user(), chatManager);
                     tag=false;
                     btn_diseaseReminder.setText(R.string.disease_gone_msg);
                 }else {
                     msg = getResources().getString(R.string.disease_gone_msg);
-                    BmobRequest.pushMessageToLover(msg, "DISEASE_GONE", DiseaseActivity.this, application.getM_user().getObjectId(), application.getM_user(), chatManager);
+                    BmobRequest.pushMessageToLover(msg, "DISEASE_GONE", DiseaseActivity.this, application.getOne_user().getObjectId(), application.getOne_user(), chatManager);
                     tag=true;
                     btn_diseaseReminder.setText(R.string.disease_come_msg);
                 }
@@ -55,7 +53,7 @@ public class DiseaseActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 msg = getResources().getString(R.string.eatdrug);
-                BmobRequest.pushMessageToLover(msg, "DRUG", DiseaseActivity.this, application.getM_user().getObjectId(), application.getM_user(), chatManager);
+                BmobRequest.pushMessageToLover(msg, "DRUG", DiseaseActivity.this, application.getOne_user().getObjectId(), application.getOne_user(), chatManager);
             }
         });
         registerBoradcastReceiver();
@@ -89,12 +87,5 @@ public class DiseaseActivity extends BaseActivity {
         myIntentFilter.addAction(DISEASE_COME_ACTION);
         //注册广播
         registerReceiver(diseaseReminderReceiver, myIntentFilter);
-    }
-
-    /**
-     * 返回
-     */
-    public void back(View view){
-        this.finish();
     }
 }

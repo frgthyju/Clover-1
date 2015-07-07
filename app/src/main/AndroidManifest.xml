@@ -24,6 +24,7 @@
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <application
         android:name=".utils.CloverApplication"
@@ -34,7 +35,7 @@
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -89,7 +90,7 @@
         </activity>
         <activity
             android:name=".ui.ChatActivity"
-            android:label="@string/title_activity_chat">
+            android:label="@string/title_activity_chat" >
         </activity>
         <activity
             android:name="ui.TTTAActivity"
@@ -100,7 +101,7 @@
             android:label="@string/title_activity_tzfe" >
         </activity>
         <activity
-            android:name="ui.SpaceActivity"
+            android:name=".ui.SpaceActivity"
             android:label="@string/title_activity_space" >
         </activity>
         <activity
@@ -123,6 +124,23 @@
             android:name=".ui.UpdateUserNickActivity"
             android:label="@string/title_activity_update_user_nick" >
         </activity>
+        <activity
+            android:name=".ui.AddMoodActivity"
+            android:label="@string/title_activity_update_user_nick" >
+        </activity>
+        <activity
+            android:name=".ui.SettingActivity"
+            android:label="@string/title_activity_setting" >
+        </activity>
+        <activity
+            android:name=".ui.ChangePasswordActivity"
+            android:label="@string/title_activity_change_password" >
+        </activity>
+        <activity
+            android:name=".ui.MessageSettingActivity"
+            android:label="@string/title_activity_message_setting" >
+        </activity>
+
     </application>
 
 </manifest>

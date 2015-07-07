@@ -70,18 +70,47 @@
     <string name="man">男</string>
     <string name="woman">女</string>
 
-    <string name="title_activity_anniversary">AnniversaryActivity</string>
-    <string name="title_activity_health">HealthActivity</string>
-    <string name="title_activity_disease">DiseaseActivity</string>
+    <string name="changepassword">修改密码</string>
+    <string name="messagesetting">消息通知</string>
+
+    <string name="oldpassword">旧密码</string>
+    <string name="newpaswword">新密码</string>
+    <string name="repeatnewpsd">确认密码</string>
+    <string name="inputoldpassword">请输入旧密码</string>
+    <string name="inputnewpassword">请输入新密码</string>
+    <string name="repeatnewpassword">请再次输入新密码</string>
+    <string name="wrongoldpassword">旧密码错误</string>
+    <string name="differentpsd">两次密码不符</string>
+
+    <string name="voice">声音</string>
+    <string name="shake">振动</string>
+
+    <string name="uploadmoodsuc">发布成功</string>
+    <string name="uploadmoodfai">发布失败</string>
+    <string name="title_activity_add_mood">添加动态</string>
+
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">正在加载...</string>
+    <string name="xlistview_header_last_time">上次更新时间：</string>
+
+    <string name="title_activity_setting">设置</string>
+    <string name="title_activity_anniversary">纪念日</string>
+    <string name="title_activity_health">健康</string>
+    <string name="title_activity_disease">疾病</string>
     <string name="title_activity_lover_manager">LoverManagerActivity</string>
-    <string name="title_activity_user_info_update">UserInfoUpdateActivity</string>
-    <string name="title_activity_chat">ChatActivity</string>
+    <string name="title_activity_user_info_update">个人资料</string>
+    <string name="title_activity_chat">聊天</string>
     <string name="title_activity_ttta">TTTAActivity</string>
     <string name="title_activity_tzfe">TZFEActivity</string>
-    <string name="title_activity_space">SpaceActivity</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="title_activity_register">RegisterActivity</string>
-    <string name="title_activity_edit_user_info">EditUserInfoActivity</string>
-    <string name="title_activity_menses">MensesActivity</string>
-    <string name="title_activity_update_user_nick">UpdateUserNickActivity</string>
+    <string name="title_activity_space">情侣空间</string>
+    <string name="title_activity_login">登录</string>
+    <string name="title_activity_register">注册</string>
+    <string name="title_activity_menses">大姨妈</string>
+    <string name="title_activity_update_user_nick">修改昵称</string>
+    <string name="title_activity_change_password">修改密码</string>
+    <string name="title_activity_message_setting">消息通知</string>
+    <string name="title_activity_dialog">DialogActivity</string>
+
+
 </resources>

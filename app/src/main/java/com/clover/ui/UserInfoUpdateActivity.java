@@ -9,9 +9,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
-import android.view.View.OnClickListener;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -19,18 +19,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.clover.R;
+import com.clover.entities.Relationship;
 import com.clover.entities.User;
 import com.clover.utils.Config;
-import com.clover.utils.ImageLoadOptions;
-import com.clover.utils.PhotoUtil;
+import com.clover.utils.PhotoUtils;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+import cn.bmob.im.bean.BmobChatUser;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.listener.DeleteListener;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
 
@@ -44,9 +53,12 @@ public class UserInfoUpdateActivity extends BaseActivity{
     private TextView tv_nick;//昵称
     private TextView tv_age;//年龄
     private TextView tv_sex;//性别
+    private ImageView iv_arraw;//头像旁的小箭头
+    private ImageView iv_nickarraw;//昵称旁的
+    private Button btn_deletelover;//解除关系
     User user;
     int age;
-    String avatarPath = "";//路径
+    String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,133 +69,260 @@ public class UserInfoUpdateActivity extends BaseActivity{
     }
 
     private void initView(){
+        rv_head = (RelativeLayout) findViewById(R.id.layout_head);
+        rv_nick = (RelativeLayout) findViewById(R.id.layout_nick);
+        rv_age = (RelativeLayout) findViewById(R.id.layout_age);
+        rv_sex = (RelativeLayout) findViewById(R.id.layout_sex);
+        iv_head = (ImageView) findViewById(R.id.avator);
+        tv_nick = (TextView) findViewById(R.id.nick);
+        tv_age = (TextView) findViewById(R.id.age);
+        tv_sex = (TextView) findViewById(R.id.sex);
+        iv_arraw = (ImageView) findViewById(R.id.iv_arraw);
+        iv_nickarraw = (ImageView) findViewById(R.id.iv_nickarraw);
+        btn_deletelover = (Button) findViewById(R.id.deletelover);
 
-        user = userManager.getCurrentUser(User.class);
-        initToolbar("编辑个人资料",new Intent(this, MainActivity.class), this);
-        rv_head = (RelativeLayout)findViewById(R.id.layout_head);
-        rv_nick = (RelativeLayout)findViewById(R.id.layout_nick);
-        rv_age = (RelativeLayout)findViewById(R.id.layout_age);
-        rv_sex = (RelativeLayout)findViewById(R.id.layout_sex);
-        iv_head = (ImageView)findViewById(R.id.avator);
-        tv_nick = (TextView)findViewById(R.id.nick);
-        tv_age = (TextView)findViewById(R.id.age);
-        tv_sex = (TextView)findViewById(R.id.sex);
+        Intent intent = getIntent();
+        String tag;
+        if(intent.getExtras()==null){
+            tag="me";
+        }else{
+            tag = intent.getStringExtra("tag");
+        }
 
-        rv_head.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(UserInfoUpdateActivity.this);
-                final String[] avator = {UserInfoUpdateActivity.this.getResources().getString(R.string.takephoto), UserInfoUpdateActivity.this.getResources().getString(R.string.choosefrommibile)};
-                builder.setItems(avator , new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent;
-                        switch (which){
-                            case 0:
-                                //拍照
-                                File avator = new File(Config.MyAvatarDir);
-                                if(!avator.exists()){
-                                    //创建文件夹,
-                                    avator.mkdirs();
-                                }
-                                File file = new File(avator, new SimpleDateFormat("yyMMddHHmmss").format(new Date()));
-                                avatarPath = file.getAbsolutePath();//获取相片绝对路径
-                                Uri uri = Uri.fromFile(file);
+        if(tag.equals("me")) {
 
-                                intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-                                startActivityForResult(intent, Config.REQUESTCODE_UPLOADAVATAR_CAMERA);
-                                break;
-                            case 1:
-                                //相册
-                                intent = new Intent(Intent.ACTION_PICK, null);
-                                intent.setDataAndType(
-                                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-                                startActivityForResult(intent,
-                                        Config.REQUESTCODE_UPLOADAVATAR_LOCATION);
-                                break;
-                        }
-                    }
-                });
-                builder.show();
-            }
-        });
-        rv_nick.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent nickIntent = new Intent(UserInfoUpdateActivity.this, UpdateUserNickActivity.class);
-                startActivity(nickIntent);
-            }
-        });
+            user = userManager.getCurrentUser(User.class);
+            initToolbar("编辑个人资料", new Intent(this, MainActivity.class), this);
 
 
-        rv_age.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar c = Calendar.getInstance();
-
-                new DatePickerDialog(UserInfoUpdateActivity.this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                // TODO Auto-generated method stub
-                                age = CalculateAge(dayOfMonth,monthOfYear + 1,year);
-                                String ageOfString = String.valueOf(age);
-                                tv_age.setText(year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
-                                tv_age.setText(ageOfString);
-                                updateAge(age);
+            rv_head.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(UserInfoUpdateActivity.this);
+                    final String[] avator = {UserInfoUpdateActivity.this.getResources().getString(R.string.takephoto), UserInfoUpdateActivity.this.getResources().getString(R.string.choosefrommibile)};
+                    builder.setItems(avator, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent;
+                            switch (which) {
+                                case 0:
+                                    //拍照
+                                    intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment
+                                            .getExternalStorageDirectory(), "temp.jpg")));
+                                    startActivityForResult(intent, Config.PHOTO_GRAPH);
+                                    break;
+                                case 1:
+                                    //相册
+                                    intent = new Intent(Intent.ACTION_PICK, null);
+                                    intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, Config.IMAGE_UNSPECIFIED);
+                                    startActivityForResult(intent, Config.PHOTO_ZOOM);
+                                    break;
                             }
-                        }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-        rv_sex.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(UserInfoUpdateActivity.this);
-                builder.setTitle(UserInfoUpdateActivity.this.getResources().getString(R.string.pleaseselectsex));
-                final String[] sex = {UserInfoUpdateActivity.this.getResources().getString(R.string.man), UserInfoUpdateActivity.this.getResources().getString(R.string.woman)};
-                builder.setItems(sex , new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        tv_sex.setText(sex[which]);
-                        updateSex(sex[which]);
-                    }
-                });
-                builder.show();
-            }
-        });
+                        }
+                    });
+                    builder.show();
+                }
+            });
+            rv_nick.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent nickIntent = new Intent(UserInfoUpdateActivity.this, UpdateUserNickActivity.class);
+                    startActivity(nickIntent);
+                }
+            });
 
 
-        refreshUser();
+            rv_age.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Calendar c = Calendar.getInstance();
+
+                    new DatePickerDialog(UserInfoUpdateActivity.this,
+                            new DatePickerDialog.OnDateSetListener() {
+                                @Override
+                                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                    // TODO Auto-generated method stub
+                                    age = CalculateAge(dayOfMonth, monthOfYear + 1, year);
+                                    String ageOfString = String.valueOf(age);
+                                    tv_age.setText(year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
+                                    tv_age.setText(ageOfString);
+                                    updateAge(age);
+                                }
+                            }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
+                }
+            });
+            rv_sex.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(UserInfoUpdateActivity.this);
+                    builder.setTitle(UserInfoUpdateActivity.this.getResources().getString(R.string.pleaseselectsex));
+                    final String[] sex = {UserInfoUpdateActivity.this.getResources().getString(R.string.man), UserInfoUpdateActivity.this.getResources().getString(R.string.woman)};
+                    builder.setItems(sex, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            tv_sex.setText(sex[which]);
+                            updateSex(sex[which]);
+                        }
+                    });
+                    builder.show();
+                }
+            });
+
+
+            refreshUser(user);
+        }else{
+            user = application.getOne_user();
+            initToolbar("情侣资料", new Intent(this, MainActivity.class), this);
+            iv_nickarraw.setVisibility(View.INVISIBLE);
+            iv_arraw.setVisibility(View.INVISIBLE);
+            btn_deletelover.setVisibility(View.VISIBLE);
+            btn_deletelover.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    unBindLover();
+                }
+            });
+            refreshUser(user);
+        }
     }
 
-    private void refreshUser(){
-        refreshAvatar();
-        tv_nick.setText(userManager.getCurrentUser(User.class).getNick());
-        tv_age.setText(String.valueOf(userManager.getCurrentUser(User.class).getAge()));
-        refreshSex();
+    private void refreshUser(User user){
+        refreshAvatar(user);
+        refreshNick(user);
+        refreshAge(user);
+        refreshSex(user);
+    }
+
+    /*
+    解除绑定
+     */
+    private void unBindLover(){
+        BmobQuery<Relationship> query = new BmobQuery<>();
+        query.setCachePolicy(BmobQuery.CachePolicy.CACHE_THEN_NETWORK);
+        query.addWhereEqualTo("m_user", BmobChatUser.getCurrentUser(UserInfoUpdateActivity.this, User.class));
+        query.findObjects(UserInfoUpdateActivity.this, new FindListener<Relationship>() {
+            @Override
+            public void onSuccess(List<Relationship> list) {
+
+                if (list.size() <= 0) {
+                    return;
+                } else {
+                    Relationship relationship = list.get(0);
+                    relationship.delete(UserInfoUpdateActivity.this, new DeleteListener() {
+                        @Override
+                        public void onSuccess() {
+                            ShowToast("解除成功");
+                            application.setOne_user(null);
+                        }
+
+                        @Override
+                        public void onFailure(int i, String s) {
+                            ShowToast("解除失败");
+                        }
+                    });
+                }
+                ShowLog("获取application对象成功");
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                ShowToast("获取application对象失败");
+                ShowLog("获取application对象失败");
+            }
+        });
+        BmobQuery<Relationship> queryW = new BmobQuery<>();
+        queryW.setCachePolicy(BmobQuery.CachePolicy.CACHE_THEN_NETWORK);
+        queryW.addWhereEqualTo("w_user", BmobChatUser.getCurrentUser(UserInfoUpdateActivity.this,User.class));
+        queryW.findObjects(UserInfoUpdateActivity.this, new FindListener<Relationship>() {
+            @Override
+            public void onSuccess(List<Relationship> list) {
+
+                if(list.size()<=0){
+                    Intent intent = new Intent(UserInfoUpdateActivity.this, LoverManagerActivity.class);
+                    startActivity(intent);
+                    ShowToast("请设置情侣");
+                    return;
+                }else{
+                    Relationship relationship = list.get(0);
+                    relationship.delete(UserInfoUpdateActivity.this, new DeleteListener() {
+                        @Override
+                        public void onSuccess() {
+                            ShowToast("解除成功");
+                            application.setOne_user(null);
+                        }
+
+                        @Override
+                        public void onFailure(int i, String s) {
+                            ShowToast("解除失败");
+                        }
+                    });
+                }
+                ShowLog("获取application对象成功");
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                ShowToast("获取application对象失败");
+                ShowLog("获取application对象失败");
+            }
+        });
     }
 
     /**
      * 刷新头像
      */
-    private void refreshAvatar(){
-        String avatarUrl = userManager.getCurrentUser(User.class).getAvatar();
+    private void refreshAvatar(User user){
+        String avatarUrl = user.getAvatar();
         if (avatarUrl != null && !avatarUrl.equals("")) {
             ImageLoader.getInstance().displayImage(avatarUrl, iv_head,
-                    ImageLoadOptions.getOptions());
+                    new DisplayImageOptions.Builder()
+                            .cacheInMemory(true)
+                            .cacheOnDisc(true)
+                            .considerExifParams(true)
+                            .imageScaleType(ImageScaleType.EXACTLY)//设置图片编码方式
+                            .bitmapConfig(Bitmap.Config.RGB_565)// 设置图片的解码类型
+                            .considerExifParams(true)
+                            .resetViewBeforeLoading(true)
+                            .displayer(new FadeInBitmapDisplayer(100))// 淡入
+                            .build());
         } else {
             iv_head.setImageResource(R.drawable.head);
         }
     }
 
     /**
+     * 刷新昵称
+     */
+    public void refreshNick(User user){
+        if(user.getNick()==null){
+            tv_nick.setText("");
+        }else{
+            tv_nick.setText(user.getNick());
+        }
+    }
+
+    /**
+     * 刷新年龄
+     */
+    public void refreshAge(User user){
+        if(user.getAge()==null){
+            tv_age.setText("");
+        }else{
+            tv_age.setText(String.valueOf(user.getAge()));
+        }
+    }
+
+    /**
      * 刷新性别
      */
-    private void refreshSex(){
-        if(userManager.getCurrentUser(User.class).getSex()){
+    private void refreshSex(User user){
+
+        if(user.getSex()==null){
+            tv_sex.setText("");
+        }else if(user.getSex()){
             tv_sex.setText(UserInfoUpdateActivity.this.getResources().getString(R.string.woman));
-        }else{
+        }else if(!user.getSex()){
             tv_sex.setText(UserInfoUpdateActivity.this.getResources().getString(R.string.man));
         }
     }
@@ -233,7 +372,7 @@ public class UserInfoUpdateActivity extends BaseActivity{
 
             @Override
             public void onFailure(int i, String s) {
-                Toast.makeText(UserInfoUpdateActivity.this, R.string.updatesuccess, Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserInfoUpdateActivity.this, R.string.updatefailure, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -260,129 +399,62 @@ public class UserInfoUpdateActivity extends BaseActivity{
 
             @Override
             public void onFailure(int i, String s) {
-                Toast.makeText(UserInfoUpdateActivity.this,R.string.updatesuccess, Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserInfoUpdateActivity.this,R.string.updatefailure, Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
     /**
-     * 裁剪
+     * 收缩图片
      */
-    private void startImageAction(Uri uri, int outputX, int outputY,
-                                  int requestCode, boolean isCrop) {
-        Intent intent;
-        if (isCrop) {
-            intent = new Intent("com.android.camera.action.CROP");
-        } else {
-            intent = new Intent(Intent.ACTION_GET_CONTENT, null);
-        }
-        intent.setDataAndType(uri, "image/*");
-        intent.putExtra("crop", "true");
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        intent.putExtra("outputX", outputX);
-        intent.putExtra("outputY", outputY);
-        intent.putExtra("scale", true);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-        intent.putExtra("return-data", true);
-        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-        intent.putExtra("noFaceDetection", true); // no face detection
-        startActivityForResult(intent, requestCode);
-    }
-
-    /**
-     * 保存裁剪的头像
-     */
-    String path;
-    private void saveCropAvatar(Intent intent) {
-        Bundle extras = intent.getExtras();
-        if (extras != null) {
-            Bitmap bitmap = extras.getParcelable("data");
-            Log.i("life", "avatar - bitmap = " + bitmap);
-            if (bitmap != null) {
-                bitmap = PhotoUtil.toRoundCorner(bitmap, 10);
-                if (isFromCamera && degree != 0) {
-                    bitmap = PhotoUtil.rotaingImageView(degree, bitmap);
-                }
-                iv_head.setImageBitmap(bitmap);
-                // 保存图片
-                String filename = new SimpleDateFormat("yyMMddHHmmss")
-                        .format(new Date())+".png";
-                path = Config.MyAvatarDir + filename;
-                PhotoUtil.saveBitmap(Config.MyAvatarDir, filename,
-                        bitmap, true);
-                // 上传头像
-                if (bitmap != null && bitmap.isRecycled()) {
-                    bitmap.recycle();
-                }
-            }
-        }
+    public void cropPhoto(Uri uri) {
+        Intent intent = PhotoUtils.startPhotoZoom(uri);
+        startActivityForResult(intent, Config.PHOTO_RESOULT);
     }
 
     /**
      * 根据intent值来判断是拍照还是从相册选择
      */
-
-    boolean isFromCamera = false;// 区分是否来自拍照
-    int degree = 0;
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case Config.REQUESTCODE_UPLOADAVATAR_CAMERA:// 拍照
-                if (resultCode == RESULT_OK) {
-                    if (!Environment.getExternalStorageState().equals(
-                            Environment.MEDIA_MOUNTED)) {
-                        ShowToast("SD不可用");
-                        return;
-                    }
-                    isFromCamera = true;
-                    File file = new File(avatarPath);
-                    degree = PhotoUtil.readPictureDegree(file.getAbsolutePath());
-                    Log.i("life", "拍照后的角度：" + degree);
-                    startImageAction(Uri.fromFile(file), 200, 200,
-                            Config.REQUESTCODE_UPLOADAVATAR_CROP, true);
-                }
-                break;
-            case Config.REQUESTCODE_UPLOADAVATAR_LOCATION:// 本地修改头像
-                Uri uri = null;
-                if (data == null) {
-                    return;
-                }
-                if (resultCode == RESULT_OK) {
-                    if (!Environment.getExternalStorageState().equals(
-                            Environment.MEDIA_MOUNTED)) {
-                        ShowToast("SD不可用");
-                        return;
-                    }
-                    isFromCamera = false;
-                    uri = data.getData();
-                    startImageAction(uri, 200, 200,
-                            Config.REQUESTCODE_UPLOADAVATAR_CROP, true);
-                } else {
-                    ShowToast("照片获取失败");
-                }
-
-                break;
-            case Config.REQUESTCODE_UPLOADAVATAR_CROP:// 裁剪头像返回
-                if (data == null) {
-                    // Toast.makeText(this, "取消选择", Toast.LENGTH_SHORT).show();
-                    return;
-                } else {
-                    saveCropAvatar(data);
-                }
-                // 初始化文件路径
-                avatarPath = "";
-                // 上传头像
+        if (resultCode == Config.NONE)
+            return;
+        // 拍照
+        if (requestCode == Config.PHOTO_GRAPH) {
+            // 设置文件保存路径
+            File picture = new File(Environment.getExternalStorageDirectory()
+                    + "/temp.jpg");
+            cropPhoto(Uri.fromFile(picture));
+        }
+        if (data == null)
+            return;
+        // 读取相册缩放图片
+        if (requestCode == Config.PHOTO_ZOOM) {
+            cropPhoto(data.getData());
+        }
+        // 处理结果
+        if (requestCode == Config.PHOTO_RESOULT) {
+            Bundle extras = data.getExtras();
+            if (extras != null) {
+                Bitmap photo = extras.getParcelable("data");
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                photo.compress(Bitmap.CompressFormat.JPEG, 75, stream);// (0-100)压缩文件
+                iv_head.setImageBitmap(photo); //把图片显示在ImageView控件上
+                String filename = new SimpleDateFormat("yyMMddHHmmss")
+                        .format(new Date())+".png";
+                path = Config.MyAvatarDir + filename;
+                PhotoUtils.saveBitmap(Config.MyAvatarDir, filename,
+                        photo, true);
                 uploadAvatar();
-                break;
-            default:
-                break;
+            }
 
         }
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
+
 
     /**
      * 上传头像
@@ -419,21 +491,15 @@ public class UserInfoUpdateActivity extends BaseActivity{
 
             @Override
             public void onFailure(int i, String s) {
-                Toast.makeText(UserInfoUpdateActivity.this,R.string.updatesuccess, Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserInfoUpdateActivity.this,R.string.updatefailure, Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    /**
-     * 返回
-     */
-    public void back(View view){
-        this.finish();
     }
 
     @Override
     public void onResume(){
         super.onResume();
-        refreshUser();
+        refreshUser(user);
     }
+
 }

@@ -1,26 +1,14 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.clover.ui.MensesActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:background="#674ea7"
-        android:minHeight="48dp"
-        android:layout_alignParentTop="true">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="back"
-            android:onClick="back"/>
-    </android.support.v7.widget.Toolbar>
+    <include layout="@layout/toolbar_layout"/>
     <Button
         android:id="@+id/sendmensesmessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/menses_tell_msg"
-        android:layout_below="@+id/toolbar"/>
+        android:text="@string/menses_tell_msg"/>
 
-</RelativeLayout>
+</LinearLayout>

@@ -29,7 +29,6 @@ public class MensesActivity extends BaseActivity {
 
     private Button btn_sendMensesMessage;
     boolean tag = true;
-    private CloverApplication application;
     String msg;
     String MENSES_COME_ACTION = "MENSES_COME";
     @Override
@@ -37,19 +36,19 @@ public class MensesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menses);
 
-        application = (CloverApplication)getApplication();
+        initToolbar(getResources().getString(R.string.title_activity_menses),new Intent(this, HealthActivity.class), this);
         btn_sendMensesMessage = (Button)findViewById(R.id.sendmensesmessage);
         btn_sendMensesMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(tag) {
                     msg = getResources().getString(R.string.menses_tell_msg);
-                    BmobRequest.pushMessageToLover(msg, "MENSES_COME", MensesActivity.this, application.getM_user().getObjectId(), application.getM_user(), chatManager);
+                    BmobRequest.pushMessageToLover(msg, "MENSES_COME", MensesActivity.this, application.getOne_user().getObjectId(), application.getOne_user(), chatManager);
                     tag=false;
                     btn_sendMensesMessage.setText(R.string.menses_gone_msg);
                 }else {
                     msg = getResources().getString(R.string.menses_gone_msg);
-                    BmobRequest.pushMessageToLover(msg, "MENSES_GONE", MensesActivity.this, application.getM_user().getObjectId(), application.getM_user(), chatManager);
+                    BmobRequest.pushMessageToLover(msg, "MENSES_GONE", MensesActivity.this, application.getOne_user().getObjectId(), application.getOne_user(), chatManager);
                     tag=true;
                     btn_sendMensesMessage.setText(R.string.menses_tell_msg);
                 }
@@ -84,10 +83,4 @@ public class MensesActivity extends BaseActivity {
         registerReceiver(mensesReminderReceiver, myIntentFilter);
     }
 
-    /**
-     * 返回
-     */
-    public void back(View view){
-        this.finish();
-    }
 }

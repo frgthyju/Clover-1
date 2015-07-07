@@ -144,14 +144,14 @@
 
 
         <Button
-            android:id="@+id/btn_add_friend"
+            android:id="@+id/deletelover"
             style="@style/Smile.Button.theme"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginLeft="@dimen/activity_vertical_margin"
             android:layout_marginRight="@dimen/activity_vertical_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/add_friend"
+            android:text="解除关系"
             android:visibility="gone" />
         </LinearLayout>
 

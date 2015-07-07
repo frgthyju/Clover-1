@@ -46,7 +46,7 @@ public class ChatActivity extends BaseActivity {
         application = (CloverApplication) getApplication();
         checkSetting();
         //获取情侣用户对象
-        targetUser = application.getM_user();
+        targetUser = application.getOne_user();
 
         messageList = BmobDB.create(this).queryMessages(targetUser.getObjectId(), 1);
 
@@ -135,7 +135,7 @@ public class ChatActivity extends BaseActivity {
 
     private void checkSetting(){
 
-        if(application.getM_user() == null){
+        if(application.getOne_user() == null){
             ShowToast("请设置您的Lover");
             Intent intent = new Intent(this, LoverManagerActivity.class);
             startActivity(intent);

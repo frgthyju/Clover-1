@@ -1,21 +1,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="@color/grey_bg"
     android:orientation="vertical"
-
-    android:paddingTop="5dp">
+    android:paddingTop="5dp"
+    android:weightSum="1">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="#ffffff"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="#111" />
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@mipmap/photo" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -65,52 +69,78 @@
         android:id="@+id/layout_set_userinfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/about_mid_bg">
+        android:background="@drawable/tv_selector"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_marginTop="15dp">
 
         <TextView
             style="@style/Smile.TextView._Black"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_height="wrap_content"
+            android:textSize="18sp"
             android:text="编辑个人资料"
-        android:paddingLeft="15dp" />
+            android:paddingLeft="15dp" />
 
         <ImageView
             style="@style/Smile.ImageView"
             android:layout_width="18dp"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
+            android:paddingRight="10dp"
             android:src="@drawable/register_bottom_arrow" />
     </RelativeLayout>
+
 
     <RelativeLayout
         android:id="@+id/layout_lover_set"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/about_mid_bg">
+        android:background="@drawable/tv_selector"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_marginTop="1dp"
+        android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/tv_loverinfo_title"
             style="@style/Smile.TextView._Black"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:paddingLeft="15dp"
+            android:textSize="18sp"
             android:text="情侣信息" />
 
         <ImageView
+            android:id="@+id/iv_right_vg"
             style="@style/Smile.ImageView"
             android:layout_width="18dp"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:contentDescription="@string/action_settings"
+            android:paddingRight="10dp"
             android:src="@drawable/register_bottom_arrow" />
+
+        <TextView
+            android:id="@+id/tv_loverinfo_vg"
+            style="@style/Smile.TextView._Black"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="26dp"
+            android:textSize="18sp"
+            android:text="12345678" />
+
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/layout_setting"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/about_mid_bg">
+        android:background="@drawable/tv_selector"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_marginTop="1dp"
+        android:layout_height="wrap_content">
 
         <TextView
             style="@style/Smile.TextView._Black"
@@ -118,6 +148,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:paddingLeft="15dp"
+            android:textSize="18sp"
             android:text="设置" />
 
         <ImageView
@@ -125,11 +156,42 @@
             android:layout_width="18dp"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
+            android:paddingRight="10dp"
             android:src="@drawable/register_bottom_arrow" />
     </RelativeLayout>
 
-    <ImageButton
-        android:id="@+id/ib_logout"
+<!--    <Button
+        android:id="@+id/bt_logout"
         android:layout_width="match_parent"
-        android:layout_height="40dp" />
+        android:layout_height="48dp"
+        android:layout_marginTop="15dp"
+        android:text="退出"/>-->
+
+    <TextView
+        android:id="@+id/tv_about"
+        style="@style/Smile.TextView._Black"
+        android:layout_width="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/tv_selector"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_marginTop="15dp"
+        android:textSize="18sp"
+        android:paddingLeft="15dp"
+        android:text="关于我们" />
+
+    <TextView
+        android:id="@+id/tv_logout"
+        style="@style/Smile.TextView._Black"
+        android:layout_width="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/tv_selector"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_marginTop="1dp"
+        android:textSize="18sp"
+        android:paddingLeft="15dp"
+        android:text="退出" />
 </LinearLayout>

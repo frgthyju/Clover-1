@@ -1,20 +1,13 @@
 package com.clover.entities;
 
-import java.util.Date;
-
 import cn.bmob.v3.BmobObject;
 
 /**
  * Created by dan on 2015/6/29.
  */
 public class Relationship extends BmobObject{
-    private Date startTime;
     private User m_user;
     private User w_user;
-
-    public Date getStartTime() {
-        return startTime;
-    }
 
     public User getM_user() {
         return m_user;
@@ -22,10 +15,6 @@ public class Relationship extends BmobObject{
 
     public User getW_user() {
         return w_user;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
     }
 
     public void setM_user(User m_user) {

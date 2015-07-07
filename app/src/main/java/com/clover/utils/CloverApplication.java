@@ -3,7 +3,6 @@ package com.clover.utils;
 import android.app.Application;
 import android.content.Context;
 
-import com.clover.entities.Relationship;
 import com.clover.entities.User;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -12,6 +11,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.utils.StorageUtils;
+
 import java.io.File;
 
 
@@ -21,7 +21,7 @@ import java.io.File;
 public class CloverApplication extends Application{
 
     public static CloverApplication application;
-    private User m_user;
+    private User one_user;
 
     @Override
     public void onCreate() {
@@ -33,12 +33,12 @@ public class CloverApplication extends Application{
         initImageLoader(getApplicationContext());
     }
 
-    public User getM_user() {
-        return m_user;
+    public User getOne_user() {
+        return one_user;
     }
 
-    public void setM_user(User m_user) {
-        this.m_user = m_user;
+    public void setOne_user(User one_user) {
+        this.one_user = one_user;
     }
 
     /** 初始化ImageLoader */

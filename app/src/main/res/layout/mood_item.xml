@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent">
+
+        <ImageView
+            android:layout_marginLeft="40dp"
+            android:layout_width="10dp"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:background="@color/toolbar_bg_color"
+            android:focusable="false" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_marginLeft="15dp"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:text="2015.7.6"
+            android:textSize="18sp"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_marginLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:id="@+id/tv_mood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1234567890wwwwwwwwwwww哦我为我问我我我"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/iv_mood"
+
+            android:layout_below="@id/tv_mood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@mipmap/mood_pic"
+            android:focusable="false" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

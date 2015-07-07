@@ -1,5 +1,6 @@
 package com.clover.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -27,6 +28,7 @@ public class UpdateUserNickActivity extends BaseActivity {
     }
 
     private void initView(){
+        initToolbar(getResources().getString(R.string.title_activity_update_user_nick),new Intent(this, UserInfoUpdateActivity.class), this);
         et_nick = (EditText)findViewById(R.id.updateNick);
         btn_finishNick = (Button)findViewById(R.id.finishNick);
 
@@ -60,7 +62,7 @@ public class UpdateUserNickActivity extends BaseActivity {
 
             @Override
             public void onFailure(int i, String s) {
-                Toast.makeText(UpdateUserNickActivity.this,R.string.updatesuccess, Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateUserNickActivity.this,R.string.updatefailure, Toast.LENGTH_SHORT).show();
             }
         });
     }

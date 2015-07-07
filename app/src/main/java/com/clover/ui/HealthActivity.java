@@ -23,6 +23,7 @@ public class HealthActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health);
 
+        initToolbar(getResources().getString(R.string.title_activity_health),new Intent(this, MainActivity.class), this);
         ib_emm = (Button)findViewById(R.id.menses);
         ib_disease = (Button)findViewById(R.id.disease);
         ib_emm.setOnClickListener(new ImageButtonClickListener());
@@ -48,11 +49,5 @@ public class HealthActivity extends BaseActivity {
         }
     }
 
-    /**
-     * 返回
-     */
-    public void back(View view){
-        this.finish();
-    }
 
 }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.clover.R;
+import com.clover.utils.CloverApplication;
 
 import cn.bmob.im.BmobChat;
 import cn.bmob.im.BmobChatManager;
@@ -21,7 +22,9 @@ public class BaseActivity extends AppCompatActivity {
 
 	BmobUserManager userManager;
     BmobChatManager chatManager;
-    String APPID = "85e40757e81851d007990f3e103ec5ae";
+    CloverApplication application;
+    String APPID = "551b50c06f7edb512c12fcddbeec4925";
+    //String APPID = "85e40757e81851d007990f3e103ec5ae";
 	private Toolbar toolbar;
 
 	protected void onCreate(android.os.Bundle arg0) {
@@ -29,8 +32,8 @@ public class BaseActivity extends AppCompatActivity {
 		userManager = BmobUserManager.getInstance(this);
         BmobChat.getInstance(this).init(APPID);
         chatManager = BmobChatManager.getInstance(this);
-
-	};
+        application = (CloverApplication) getApplication();
+	}
 	
 	Toast mToast;
 	public void ShowToast(final String text) {
@@ -76,5 +79,7 @@ public class BaseActivity extends AppCompatActivity {
 		ImageView iv_back;
 		TextView tv_title;
 	}
+
+
 
 }
