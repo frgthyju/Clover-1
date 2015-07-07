@@ -31,7 +31,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:scaleType="fitXY"
-                android:background="#000"/>
+                android:src="@mipmap/mood_add"/>
         </GridLayout>
     </LinearLayout>
     <Button
